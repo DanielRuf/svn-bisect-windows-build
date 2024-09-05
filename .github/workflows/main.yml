@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
-      - uses: shogo82148/actions-setup-perl@v1
+      # - uses: shogo82148/actions-setup-perl@v1
 #      - name: Install dependencies
 #        run: |
 #          sudo apt-get update
