@@ -30,7 +30,7 @@ jobs:
           cd svn-bisect
           perl Build.PL
           dir
-          Build installdeps
+          ./Build installdeps
       - name: Build
         run: |
           cd svn-bisect
