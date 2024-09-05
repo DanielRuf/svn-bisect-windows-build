@@ -22,6 +22,7 @@ jobs:
         run: |
           chcp 65001 #set code page to utf-8
           echo ("PERL_MM_USE_DEFAULT=1") >> $env:GITHUB_ENV
+          cd svn-bisect
           cpan -fi Module::Build
           cpan -fi PAR::Packer
       - name: Configure
