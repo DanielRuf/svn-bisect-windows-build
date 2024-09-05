@@ -1,0 +1,40 @@
+name: Build and test
+
+on: [push, pull_request]
+
+#env:
+#  UBSAN_OPTIONS: print_stacktrace=1
+
+jobs:
+  mingw-build:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shogo82148/actions-setup-perl@v1
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libperl-dev
+      - name: Clone source
+        run: |
+          git clone https://github.com/Infinoid/svn-bisect.git
+      - name: Configure
+        run: |
+          cd svn-bisect
+          perl Build.PL
+          ./Build installdeps
+      - name: Install Packer
+        run: |
+          chcp 65001 #set code page to utf-8
+          echo ("PERL_MM_USE_DEFAULT=1") >> $env:GITHUB_ENV
+          cpan -fi PAR::Packer
+      - name: Build
+        run: |
+          pp -o svn-bisect.exe ./svn-bisect/bin/svn-bisect
+          dir
+      - uses: actions/upload-artifact@v4
+        with:
+          name: svn-bisect.exe
+          path: svn-bisect.exe
+          compression-level: 0
+
