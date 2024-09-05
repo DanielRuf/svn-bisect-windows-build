@@ -6,7 +6,7 @@ on: [push, pull_request]
 #  UBSAN_OPTIONS: print_stacktrace=1
 
 jobs:
-  mingw-build:
+  build:
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
@@ -22,7 +22,7 @@ jobs:
         run: |
           cd svn-bisect
           perl Build.PL
-          ./Build installdeps
+          Build installdeps
       - name: Install Packer
         run: |
           chcp 65001 #set code page to utf-8
