@@ -22,6 +22,7 @@ jobs:
         run: |
           cd svn-bisect
           perl Build.PL
+          dir
           Build installdeps
       - name: Install Packer
         run: |
